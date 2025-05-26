@@ -1,14 +1,19 @@
-import {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import './index.css'
 
-function PoliticianCard({name, biography, image}) {
-  <div className="card-politici" key={politician.id}>
-                <img src={politician.image} alt={politician.name} />
-                <h2>{politician.name}</h2>
-                <p><strong>posizione:</strong>{politician.position}</p>
-                <p>{politician.biography}</p>
-              </div>
-}
+function PoliticianCard({name, biography, image, position}) {
+  console.log("card-politici");  
+  return(
+    <div className="card-politici">
+      <img src={image} alt={name} />
+      <h2>{name}</h2>
+      <p><strong>posizione:</strong>{position}</p>
+      <p>{biography}</p>
+    </div>
+  )  
+};
+
+const MemorizedCard = React.memo(PoliticianCard);
 
 function App() {  
 
@@ -42,7 +47,7 @@ function App() {
       />
       <div className="lista-politici">
         {filteredPoliticians.map(politician =>(
-          <PoliticianCard  key={politician.id} {...politician}/>
+          <MemorizedCard  key={politician.id} {...politician}/>
         ))}
       </div>
       
