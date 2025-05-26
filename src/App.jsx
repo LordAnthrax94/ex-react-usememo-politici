@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import {useState, useEffect, useMemo, memo} from 'react';
 import './index.css'
 
-function PoliticianCard({name, biography, image, position}) {
+const PoliticianCard = memo(({name, biography, image, position}) => {
   console.log("card-politici");  
   return(
     <div className="card-politici">
@@ -11,9 +11,7 @@ function PoliticianCard({name, biography, image, position}) {
       <p>{biography}</p>
     </div>
   )  
-};
-
-const MemorizedCard = React.memo(PoliticianCard);
+});
 
 function App() {  
 
@@ -47,7 +45,7 @@ function App() {
       />
       <div className="lista-politici">
         {filteredPoliticians.map(politician =>(
-          <MemorizedCard  key={politician.id} {...politician}/>
+          <PoliticianCard  key={politician.id} {...politician}/>
         ))}
       </div>
       
